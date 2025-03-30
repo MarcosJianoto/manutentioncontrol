@@ -1,12 +1,17 @@
 package com.manutentioncontrol.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class CategoryManutentionDTO {
 	
 	
 	private Integer id;
-
+	
 	private Integer userId;
-
+	
+	@NotNull(message = "Categoria não pode ser nula")
+	@NotBlank(message = "Categoria não pode ficar em branco")
 	private String name;
 
 	public CategoryManutentionDTO() {

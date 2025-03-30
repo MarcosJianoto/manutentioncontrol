@@ -17,10 +17,12 @@ public class UsersEntity {
 	@SequenceGenerator(name = "users_sequence", sequenceName = "users_sequence", allocationSize = 1)
 	private Integer id;
 
-	@Column(name = "email")
+	
+	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "password")
+	
+	@Column(name = "password", nullable = false)
 	private String password;
 
 	public UsersEntity() {
@@ -39,7 +41,6 @@ public class UsersEntity {
 		this.email = email;
 		this.password = password;
 	}
-
 
 
 	public Integer getId() {

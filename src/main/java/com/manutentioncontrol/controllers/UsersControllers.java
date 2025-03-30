@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manutentioncontrol.dto.UsersDTO;
 import com.manutentioncontrol.services.UsersService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 public class UsersControllers {
@@ -28,7 +30,7 @@ public class UsersControllers {
 	}
 
 	@PostMapping
-	public ResponseEntity<String> createUser(@RequestBody UsersDTO usersDTO) {
+	public ResponseEntity<String> createUser(@Valid @RequestBody UsersDTO usersDTO) {
 		usersService.createUser(usersDTO);
 		return ResponseEntity.ok("Usuário criado com sucesso!");
 	}
@@ -44,7 +46,7 @@ public class UsersControllers {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<String> updateUser(@PathVariable Integer id, @RequestBody UsersDTO usersDTO) {
+	public ResponseEntity<String> updateUser(@PathVariable Integer id, @Valid @RequestBody UsersDTO usersDTO) {
 		usersService.editUser(id, usersDTO);
 		return ResponseEntity.ok("Usuário atualizado com sucesso!");
 	}
@@ -52,6 +54,6 @@ public class UsersControllers {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
 		usersService.deleteUser(id);
-		return ResponseEntity.ok("Usuário deletado com sucesso!"); 
+		return ResponseEntity.ok("Usuário deletado com sucesso!");
 	}
 }

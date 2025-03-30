@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.manutentioncontrol.dto.CategoryManutentionDTO;
 import com.manutentioncontrol.entities.CategoryManutention;
@@ -15,8 +14,7 @@ import com.manutentioncontrol.repositories.UsersRepository;
 @Service
 public class CategoryManutentionService {
 
-	@Autowired
-	private CategoryManutentionRepository categoryManutentionRepository;
+	@Autowired	 CategoryManutentionRepository categoryManutentionRepository;
 	private UsersRepository usersRepository;
 
 	public CategoryManutentionService(CategoryManutentionRepository categoryManutentionRepository,
@@ -25,7 +23,18 @@ public class CategoryManutentionService {
 		this.usersRepository = usersRepository;
 	}
 
+	public void blankToNull(CategoryManutentionDTO category) {
+		if (category.getName() != null) {
+			String categoryName = category.getName().trim();
+			if (categoryName.isBlank() || categoryName.isEmpty()) {
+				category.setName(null);
+			}
+		}
+	}
+
 	public void createCategory(CategoryManutentionDTO categoryManutentionDTO) {
+
+		blankToNull(categoryManutentionDTO);
 
 		UsersEntity user = usersRepository.findById(categoryManutentionDTO.getUserId())
 				.orElseThrow(() -> new IllegalArgumentException("user not found"));
@@ -33,12 +42,9 @@ public class CategoryManutentionService {
 		if (categoryManutentionRepository.existsByName(categoryManutentionDTO.getName())) {
 			throw new IllegalArgumentException("Categoria já existe! ");
 		} else {
-
 			CategoryManutention categoryManutention = new CategoryManutention(user, categoryManutentionDTO.getName());
 			categoryManutentionRepository.save(categoryManutention);
-
 		}
-
 	}
 
 	public CategoryManutention getCategoryById(Integer id) {
@@ -51,6 +57,8 @@ public class CategoryManutentionService {
 	}
 
 	public void updateCategory(Integer id, CategoryManutentionDTO categoryManutentionDTO) {
+		blankToNull(categoryManutentionDTO);
+
 		CategoryManutention categoryManutention = getCategoryById(id);
 		categoryManutention.setName(categoryManutentionDTO.getName());
 		categoryManutentionRepository.save(categoryManutention);
@@ -61,6 +69,7 @@ public class CategoryManutentionService {
 			throw new IllegalArgumentException("Categoria não encontrada para exclusão!");
 		}
 		categoryManutentionRepository.deleteById(id);
+		
 	}
 
 }

@@ -11,11 +11,26 @@ import com.manutentioncontrol.repositories.UsersRepository;
 
 @Service
 public class UsersService {
-	
+
 	@Autowired
 	private UsersRepository usersRepository;
 
+	public void blankToNull(UsersDTO user) {
+		if (user.getEmail() != null || user.getPassword() != null) {
+			String userEmailTrim = user.getEmail().trim();
+			String userPasswordTrim = user.getPassword().trim();
+			if (userEmailTrim.isBlank() || userEmailTrim.isEmpty()) {
+				user.setEmail(null);
+			}
+			if (userPasswordTrim.isBlank() || userPasswordTrim.isEmpty()) {
+				user.setPassword(null);
+			}
+		}
+	}
+
 	public void createUser(UsersDTO userDTO) {
+		blankToNull(userDTO);
+
 		if (usersRepository.existsByEmail(userDTO.getEmail())) {
 			throw new IllegalArgumentException("Email already in use.");
 		}
@@ -28,6 +43,9 @@ public class UsersService {
 	}
 
 	public void editUser(Integer id, UsersDTO userDTO) {
+
+		blankToNull(userDTO);
+
 		UsersEntity user = findUser(id);
 		user.setEmail(userDTO.getEmail());
 		user.setPassword(userDTO.getPassword());
@@ -52,9 +70,13 @@ public class UsersService {
 				throw new IllegalArgumentException("User not found");
 			}
 			usersRepository.deleteById(id);
+			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IllegalArgumentException("Error deleting user" + e.getMessage());
 		}
+
+		System.out.println();
 	}
 }

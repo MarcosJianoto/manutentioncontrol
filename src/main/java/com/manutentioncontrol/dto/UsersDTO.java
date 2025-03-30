@@ -1,10 +1,21 @@
 package com.manutentioncontrol.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class UsersDTO {
 	private Integer id;
 
+	@NotNull(message = "Senha não pode ser nula")
+	@NotBlank(message = "Senha não pode ficar em branco")
+	@Email(message = "Formato de e-mail inválido")
 	private String email;
 
+	@NotNull(message = "Senha não pode ser nula")
+	@NotBlank(message = "Senha não pode ficar em branco")
+	@Size(min = 8, message = "Senha precisa ter no mínimo 8 caracteres")
 	private String password;
 
 	public UsersDTO() {
