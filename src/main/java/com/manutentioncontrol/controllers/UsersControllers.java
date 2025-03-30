@@ -33,7 +33,7 @@ public class UsersControllers {
 		return ResponseEntity.ok("Usuário criado com sucesso!");
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("{id}")
 	public ResponseEntity<UsersDTO> getUser(@PathVariable Integer id) {
 		return ResponseEntity.ok(usersService.getUser(id));
 	}
@@ -52,6 +52,6 @@ public class UsersControllers {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
 		usersService.deleteUser(id);
-		return ResponseEntity.ok("Usuário deletado com sucesso!");
+		return ResponseEntity.ok("Usuário deletado com sucesso!"); 
 	}
 }

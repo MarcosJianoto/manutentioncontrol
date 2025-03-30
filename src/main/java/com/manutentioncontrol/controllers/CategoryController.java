@@ -31,7 +31,7 @@ public class CategoryController {
 	@PostMapping
 	public ResponseEntity<String> createCategory(@RequestBody CategoryManutentionDTO categoryManutentionDTO) {
 		categoryManutentionService.createCategory(categoryManutentionDTO);
-		return ResponseEntity.ok("Categoria criada com sucesso!");
+		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping("/{id}")

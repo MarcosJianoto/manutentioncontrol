@@ -9,5 +9,7 @@ import com.manutentioncontrol.entities.CategoryManutention;
 public interface CategoryManutentionRepository extends JpaRepository<CategoryManutention, Integer> {
 
 	boolean existsByName(String name);
+
+	CategoryManutention findByName(String name);
 	
 }

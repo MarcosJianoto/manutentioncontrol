@@ -30,8 +30,15 @@ public class CategoryManutentionService {
 		UsersEntity user = usersRepository.findById(categoryManutentionDTO.getUserId())
 				.orElseThrow(() -> new IllegalArgumentException("user not found"));
 
-		CategoryManutention categoryManutention = new CategoryManutention(user, categoryManutentionDTO.getName());
-		categoryManutentionRepository.save(categoryManutention);
+		if (categoryManutentionRepository.existsByName(categoryManutentionDTO.getName())) {
+			throw new IllegalArgumentException("Categoria já existe! ");
+		} else {
+
+			CategoryManutention categoryManutention = new CategoryManutention(user, categoryManutentionDTO.getName());
+			categoryManutentionRepository.save(categoryManutention);
+
+		}
+
 	}
 
 	public CategoryManutention getCategoryById(Integer id) {
