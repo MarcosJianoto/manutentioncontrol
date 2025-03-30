@@ -8,8 +8,8 @@ import jakarta.validation.constraints.Size;
 public class UsersDTO {
 	private Integer id;
 
-	@NotNull(message = "Senha não pode ser nula")
-	@NotBlank(message = "Senha não pode ficar em branco")
+	@NotNull(message = "Email não pode ser nulo")
+	@NotBlank(message = "Email não pode ficar em branco")
 	@Email(message = "Formato de e-mail inválido")
 	private String email;
 
@@ -19,7 +19,6 @@ public class UsersDTO {
 	private String password;
 
 	public UsersDTO() {
-
 	}
 
 	public UsersDTO(Integer id, String email, String password) {

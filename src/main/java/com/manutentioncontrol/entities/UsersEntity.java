@@ -28,7 +28,6 @@ public class UsersEntity {
 	public UsersEntity() {
 	}
 	
-	
 	public UsersEntity(String email, String password) {
 		super();
 		this.email = email;
