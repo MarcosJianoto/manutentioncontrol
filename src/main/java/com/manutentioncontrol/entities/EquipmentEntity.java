@@ -60,7 +60,6 @@ public class EquipmentEntity {
 			Integer maxTimeBetweenMaintenance, Integer lifetime, String localization, PriorityEquipment priority,
 			StatusEquipment status, Integer notificationDay, LocalDateTime dateLastMaintenance) {
 		super();
-		this.id = id;
 		this.category = category;
 		this.name = name;
 		this.dateHourInstalation = dateHourInstalation;

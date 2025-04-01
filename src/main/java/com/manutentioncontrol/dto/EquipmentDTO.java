@@ -2,9 +2,6 @@ package com.manutentioncontrol.dto;
 
 import java.time.LocalDateTime;
 
-import com.manutentioncontrol.entities.PriorityEquipment;
-import com.manutentioncontrol.entities.StatusEquipment;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,7 +17,7 @@ public class EquipmentDTO {
 	@NotBlank(message = "Nome não pode ficar em branco")
 	private String name;
 
-	private LocalDateTime dateHourInstalation;
+	private String dateHourInstalation;
 
 	@NotNull(message = "Tempo maximo entre manutenções não pode ser nulo")
 	@NotBlank(message = "Tempo maximo entre manutenções não pode ficar em branco")
@@ -32,25 +29,25 @@ public class EquipmentDTO {
 
 	private String localization;
 
-	private PriorityEquipment priority;
+	private String priority;
 
 	@NotNull(message = "Status não pode ser nulo")
 	@NotBlank(message = "Status não pode ficar em branco")
-	private StatusEquipment status;
+	private String status;
 
 	private Integer notificationDay;
 
 	@NotNull(message = "Data da ultima manutenção não pode ser nulo")
 	@NotBlank(message = "Data da ultima manutenção não pode ficar em branco")
-	private LocalDateTime dateLastMaintenance;
+	private String dateLastMaintenance;
 
 	public EquipmentDTO() {
 		super();
 	}
 
-	public EquipmentDTO(Integer id, Integer categoryId, String name, LocalDateTime dateHourInstalation,
-			Integer maxTimeBetweenMaintenance, Integer lifetime, String localization, PriorityEquipment priority,
-			StatusEquipment status, Integer notificationDay, LocalDateTime dateLastMaintenance) {
+	public EquipmentDTO(Integer id, Integer categoryId, String name, String dateHourInstalation,
+			Integer maxTimeBetweenMaintenance, Integer lifetime, String localization, String priority,
+			String status, Integer notificationDay, String dateLastMaintenance) {
 		super();
 		this.id = id;
 		this.categoryId = categoryId;
@@ -89,11 +86,11 @@ public class EquipmentDTO {
 		this.name = name;
 	}
 
-	public LocalDateTime getDateHourInstalation() {
+	public String getDateHourInstalation() {
 		return dateHourInstalation;
 	}
 
-	public void setDateHourInstalation(LocalDateTime dateHourInstalation) {
+	public void setDateHourInstalation(String dateHourInstalation) {
 		this.dateHourInstalation = dateHourInstalation;
 	}
 
@@ -121,19 +118,19 @@ public class EquipmentDTO {
 		this.localization = localization;
 	}
 
-	public PriorityEquipment getPriority() {
+	public String getPriority() {
 		return priority;
 	}
 
-	public void setPriority(PriorityEquipment priority) {
+	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 
-	public StatusEquipment getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusEquipment status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -145,11 +142,11 @@ public class EquipmentDTO {
 		this.notificationDay = notificationDay;
 	}
 
-	public LocalDateTime getDateLastMaintenance() {
+	public String getDateLastMaintenance() {
 		return dateLastMaintenance;
 	}
 
-	public void setDateLastMaintenance(LocalDateTime dateLastMaintenance) {
+	public void setDateLastMaintenance(String dateLastMaintenance) {
 		this.dateLastMaintenance = dateLastMaintenance;
 	}
 
