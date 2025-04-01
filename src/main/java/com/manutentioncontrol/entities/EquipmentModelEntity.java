@@ -17,8 +17,8 @@ import jakarta.persistence.Table;
 public class EquipmentModelEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_sequence")
-	@SequenceGenerator(name = "users_sequence", sequenceName = "users_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "equipment_model_sequence")
+	@SequenceGenerator(name = "equipment_model_sequence", sequenceName = "equipment_model_sequence", allocationSize = 1)
 	private Integer id;
 
 	@ManyToOne
@@ -35,7 +35,7 @@ public class EquipmentModelEntity {
 	private Integer lifetimeValue;
 
 	@Column(name = "lifetime_unit")
-	private String lifetimeUnit;
+	private LifeTimeUnit lifetimeUnit;
 
 	@Column(name = "lifetime_fixed_date")
 	private LocalDateTime lifetimeFixedDate;
@@ -45,7 +45,7 @@ public class EquipmentModelEntity {
 	}
 
 	public EquipmentModelEntity(CategoryManutention category, String name, Integer maxTimeBetweenMaintenance,
-			Integer lifetimeValue, String lifetimeUnit, LocalDateTime lifetimeFixedDate) {
+			Integer lifetimeValue, LifeTimeUnit lifetimeUnit, LocalDateTime lifetimeFixedDate) {
 		super();
 		this.category = category;
 		this.name = name;
@@ -95,11 +95,11 @@ public class EquipmentModelEntity {
 		this.lifetimeValue = lifetimeValue;
 	}
 
-	public String getLifetimeUnit() {
+	public LifeTimeUnit getLifetimeUnit() {
 		return lifetimeUnit;
 	}
 
-	public void setLifetimeUnit(String lifetimeUnit) {
+	public void setLifetimeUnit(LifeTimeUnit lifetimeUnit) {
 		this.lifetimeUnit = lifetimeUnit;
 	}
 

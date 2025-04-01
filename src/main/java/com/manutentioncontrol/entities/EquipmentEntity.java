@@ -17,25 +17,13 @@ import jakarta.persistence.Table;
 public class EquipmentEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_sequence")
-	@SequenceGenerator(name = "users_sequence", sequenceName = "users_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "equipment_sequence")
+	@SequenceGenerator(name = "equipment_sequence", sequenceName = "equipment_sequence", allocationSize = 1)
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "category_id")
-	private CategoryManutention category;
-
-	@Column(name = "name")
-	private String name;
-
-	@Column(name = "date_hour_instalation")
-	private LocalDateTime dateHourInstalation;
-
-	@Column(name = "max_time_between_maintenance")
-	private Integer maxTimeBetweenMaintenance;
-
-	@Column(name = "lifetime")
-	private Integer lifetime;
+	@JoinColumn(name = "equipment_model_id")
+	private EquipmentModelEntity equipmentModel;
 
 	@Column(name = "localization")
 	private String localization;
@@ -52,24 +40,22 @@ public class EquipmentEntity {
 	@Column(name = "last_maintenance_date")
 	private LocalDateTime dateLastMaintenance;
 
+	@Column(name = "next_maintenance_date")
+	private LocalDateTime nextMaintenanceDate;
+
 	public EquipmentEntity() {
-		super();
 	}
 
-	public EquipmentEntity(Integer id, CategoryManutention category, String name, LocalDateTime dateHourInstalation,
-			Integer maxTimeBetweenMaintenance, Integer lifetime, String localization, PriorityEquipment priority,
-			StatusEquipment status, Integer notificationDay, LocalDateTime dateLastMaintenance) {
-		super();
-		this.category = category;
-		this.name = name;
-		this.dateHourInstalation = dateHourInstalation;
-		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
-		this.lifetime = lifetime;
+	public EquipmentEntity(EquipmentModelEntity equipmentModel, String localization, PriorityEquipment priority,
+			StatusEquipment status, Integer notificationDay, LocalDateTime dateLastMaintenance,
+			LocalDateTime nextMaintenanceDate) {
+		this.equipmentModel = equipmentModel;
 		this.localization = localization;
 		this.priority = priority;
 		this.status = status;
 		this.notificationDay = notificationDay;
 		this.dateLastMaintenance = dateLastMaintenance;
+		this.nextMaintenanceDate = nextMaintenanceDate;
 	}
 
 	public Integer getId() {
@@ -80,44 +66,12 @@ public class EquipmentEntity {
 		this.id = id;
 	}
 
-	public CategoryManutention getCategory() {
-		return category;
+	public EquipmentModelEntity getEquipmentModel() {
+		return equipmentModel;
 	}
 
-	public void setCategory(CategoryManutention category) {
-		this.category = category;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public LocalDateTime getDateHourInstalation() {
-		return dateHourInstalation;
-	}
-
-	public void setDateHourInstalation(LocalDateTime dateHourInstalation) {
-		this.dateHourInstalation = dateHourInstalation;
-	}
-
-	public Integer getMaxTimeBetweenMaintenance() {
-		return maxTimeBetweenMaintenance;
-	}
-
-	public void setMaxTimeBetweenMaintenance(Integer maxTimeBetweenMaintenance) {
-		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
-	}
-
-	public Integer getLifetime() {
-		return lifetime;
-	}
-
-	public void setLifetime(Integer lifetime) {
-		this.lifetime = lifetime;
+	public void setEquipmentModel(EquipmentModelEntity equipmentModelId) {
+		this.equipmentModel = equipmentModelId;
 	}
 
 	public String getLocalization() {
@@ -158,6 +112,14 @@ public class EquipmentEntity {
 
 	public void setDateLastMaintenance(LocalDateTime dateLastMaintenance) {
 		this.dateLastMaintenance = dateLastMaintenance;
+	}
+
+	public LocalDateTime getNextMaintenanceDate() {
+		return nextMaintenanceDate;
+	}
+
+	public void setNextMaintenanceDate(LocalDateTime nextMaintenanceDate) {
+		this.nextMaintenanceDate = nextMaintenanceDate;
 	}
 
 }
