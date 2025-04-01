@@ -2,6 +2,8 @@ package com.manutentioncontrol.dto;
 
 import java.time.LocalDateTime;
 
+import com.manutentioncontrol.entities.EquipmentModelEntity;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -9,23 +11,9 @@ public class EquipmentDTO {
 
 	private Integer id;
 
-	@NotNull(message = "Category não pode ser nulo")
-	@NotBlank(message = "Category não pode ficar em branco")
-	private Integer categoryId;
-
-	@NotNull(message = "Nome não pode ser nulo")
-	@NotBlank(message = "Nome não pode ficar em branco")
-	private String name;
-
-	private String dateHourInstalation;
-
-	@NotNull(message = "Tempo maximo entre manutenções não pode ser nulo")
-	@NotBlank(message = "Tempo maximo entre manutenções não pode ficar em branco")
-	private Integer maxTimeBetweenMaintenance;
-
-	@NotNull(message = "Tempo de vida não pode ser nulo")
-	@NotBlank(message = "Tempo de vida não pode ficar em branco")
-	private Integer lifetime;
+	@NotNull(message = "EquipmentModel não pode ser nulo")
+	@NotBlank(message = "EquipmentModel não pode ficar em branco")
+	private EquipmentModelEntity equipmentModel;
 
 	private String localization;
 
@@ -35,31 +23,37 @@ public class EquipmentDTO {
 	@NotBlank(message = "Status não pode ficar em branco")
 	private String status;
 
+	@NotNull(message = "NotificationDay não pode ser nulo")
+	@NotBlank(message = "NotificationDay não pode ficar em branco")
 	private Integer notificationDay;
 
-	@NotNull(message = "Data da ultima manutenção não pode ser nulo")
-	@NotBlank(message = "Data da ultima manutenção não pode ficar em branco")
-	private String dateLastMaintenance;
+	@NotNull(message = "Data ultima manutenção não pode ser nulo")
+	@NotBlank(message = "Data ultima manutenção não pode ficar em branco")
+	private LocalDateTime dateLastMaintenance;
 
+	@NotNull(message = "Data próxima manutenção não pode ser nulo")
+	@NotBlank(message = "Data próxima manutenção não pode ficar em branco")
+	private LocalDateTime nextMaintenanceDate;
+
+	
+	
 	public EquipmentDTO() {
-		super();
 	}
 
-	public EquipmentDTO(Integer id, Integer categoryId, String name, String dateHourInstalation,
-			Integer maxTimeBetweenMaintenance, Integer lifetime, String localization, String priority,
-			String status, Integer notificationDay, String dateLastMaintenance) {
-		super();
-		this.id = id;
-		this.categoryId = categoryId;
-		this.name = name;
-		this.dateHourInstalation = dateHourInstalation;
-		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
-		this.lifetime = lifetime;
+	public EquipmentDTO(
+			@NotNull(message = "EquipmentModel não pode ser nulo") @NotBlank(message = "EquipmentModel não pode ficar em branco") EquipmentModelEntity equipmentModel,
+			String localization, String priority,
+			@NotNull(message = "Status não pode ser nulo") @NotBlank(message = "Status não pode ficar em branco") String status,
+			@NotNull(message = "NotificationDay não pode ser nulo") @NotBlank(message = "NotificationDay não pode ficar em branco") Integer notificationDay,
+			@NotNull(message = "Data ultima manutenção não pode ser nulo") @NotBlank(message = "Data ultima manutenção não pode ficar em branco") LocalDateTime dateLastMaintenance,
+			@NotNull(message = "Data próxima manutenção não pode ser nulo") @NotBlank(message = "Data próxima manutenção não pode ficar em branco") LocalDateTime nextMaintenanceDate) {
+		this.equipmentModel = equipmentModel;
 		this.localization = localization;
 		this.priority = priority;
 		this.status = status;
 		this.notificationDay = notificationDay;
 		this.dateLastMaintenance = dateLastMaintenance;
+		this.nextMaintenanceDate = nextMaintenanceDate;
 	}
 
 	public Integer getId() {
@@ -70,44 +64,12 @@ public class EquipmentDTO {
 		this.id = id;
 	}
 
-	public Integer getCategoryId() {
-		return categoryId;
+	public EquipmentModelEntity getEquipmentModel() {
+		return equipmentModel;
 	}
 
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDateHourInstalation() {
-		return dateHourInstalation;
-	}
-
-	public void setDateHourInstalation(String dateHourInstalation) {
-		this.dateHourInstalation = dateHourInstalation;
-	}
-
-	public Integer getMaxTimeBetweenMaintenance() {
-		return maxTimeBetweenMaintenance;
-	}
-
-	public void setMaxTimeBetweenMaintenance(Integer maxTimeBetweenMaintenance) {
-		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
-	}
-
-	public Integer getLifetime() {
-		return lifetime;
-	}
-
-	public void setLifetime(Integer lifetime) {
-		this.lifetime = lifetime;
+	public void setEquipmentModel(EquipmentModelEntity equipmentModel) {
+		this.equipmentModel = equipmentModel;
 	}
 
 	public String getLocalization() {
@@ -142,12 +104,22 @@ public class EquipmentDTO {
 		this.notificationDay = notificationDay;
 	}
 
-	public String getDateLastMaintenance() {
+	public LocalDateTime getDateLastMaintenance() {
 		return dateLastMaintenance;
 	}
 
-	public void setDateLastMaintenance(String dateLastMaintenance) {
+	public void setDateLastMaintenance(LocalDateTime dateLastMaintenance) {
 		this.dateLastMaintenance = dateLastMaintenance;
 	}
+
+	public LocalDateTime getNextMaintenanceDate() {
+		return nextMaintenanceDate;
+	}
+
+	public void setNextMaintenanceDate(LocalDateTime nextMaintenanceDate) {
+		this.nextMaintenanceDate = nextMaintenanceDate;
+	}
+	
+	
 
 }
