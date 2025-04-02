@@ -3,7 +3,7 @@ package com.manutentioncontrol.dto;
 import java.time.LocalDateTime;
 
 import com.manutentioncontrol.entities.CategoryManutention;
-import com.manutentioncontrol.entities.LifeTimeUnit;
+import com.manutentioncontrol.entities.Unit;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,13 +24,17 @@ public class EquipmentModelDTO {
 	@NotBlank(message = "Tempo maximo entre manutenções não pode ficar em branco")
 	private Integer maxTimeBetweenMaintenance;
 
+	@NotNull(message = "Unidade do tempo maximo entre manutenções não pode ser nulo")
+	@NotBlank(message = "Unidade do tempo maximo entre manutenções não pode ficar em branco")
+	private String maxTimeBetweenMaintenanceUnit;
+
 	@NotNull(message = "Tempo de vida não pode ser nulo")
 	@NotBlank(message = "Tempo de vida não pode ficar em branco")
 	private Integer lifetimeValue;
 
 	@NotNull(message = "Unidade do tempo de vida não pode ser nulo")
 	@NotBlank(message = "Unidade do tempo de vid não pode ficar em branco")
-	private LifeTimeUnit lifetimeUnit;
+	private Unit lifetimeUnit;
 
 	private LocalDateTime lifetimeFixedDate;
 
@@ -39,7 +43,7 @@ public class EquipmentModelDTO {
 	}
 
 	public EquipmentModelDTO(CategoryManutention category, String name, Integer maxTimeBetweenMaintenance,
-			Integer lifetimeValue, LifeTimeUnit lifetimeUnit, LocalDateTime lifetimeFixedDate) {
+			Integer lifetimeValue, Unit lifetimeUnit, LocalDateTime lifetimeFixedDate) {
 		super();
 		this.category = category;
 		this.name = name;
@@ -81,6 +85,14 @@ public class EquipmentModelDTO {
 		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
 	}
 
+	public String getMaxTimeBetweenMaintenanceUnit() {
+		return maxTimeBetweenMaintenanceUnit;
+	}
+
+	public void setMaxTimeBetweenMaintenanceUnit(String maxTimeBetweenMaintenanceUnit) {
+		this.maxTimeBetweenMaintenanceUnit = maxTimeBetweenMaintenanceUnit;
+	}
+
 	public Integer getLifetimeValue() {
 		return lifetimeValue;
 	}
@@ -89,11 +101,11 @@ public class EquipmentModelDTO {
 		this.lifetimeValue = lifetimeValue;
 	}
 
-	public LifeTimeUnit getLifetimeUnit() {
+	public Unit getLifetimeUnit() {
 		return lifetimeUnit;
 	}
 
-	public void setLifetimeUnit(LifeTimeUnit lifetimeUnit) {
+	public void setLifetimeUnit(Unit lifetimeUnit) {
 		this.lifetimeUnit = lifetimeUnit;
 	}
 

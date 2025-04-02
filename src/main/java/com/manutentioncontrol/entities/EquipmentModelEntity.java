@@ -31,11 +31,14 @@ public class EquipmentModelEntity {
 	@Column(name = "max_time_between_maintenance")
 	private Integer maxTimeBetweenMaintenance;
 
+	@Column(name = "max_time_between_maintenance_unit")
+	private Unit maxTimeBetweenMaintenanceUnit;
+
 	@Column(name = "lifetime_value")
 	private Integer lifetimeValue;
 
-	@Column(name = "lifetime_unit")
-	private LifeTimeUnit lifetimeUnit;
+	@Column(name = "unit")
+	private Unit lifetimeUnit;
 
 	@Column(name = "lifetime_fixed_date")
 	private LocalDateTime lifetimeFixedDate;
@@ -45,11 +48,13 @@ public class EquipmentModelEntity {
 	}
 
 	public EquipmentModelEntity(CategoryManutention category, String name, Integer maxTimeBetweenMaintenance,
-			Integer lifetimeValue, LifeTimeUnit lifetimeUnit, LocalDateTime lifetimeFixedDate) {
+			Unit maxTimeBetweenMaintenanceUnit, Integer lifetimeValue, Unit lifetimeUnit,
+			LocalDateTime lifetimeFixedDate) {
 		super();
 		this.category = category;
 		this.name = name;
 		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
+		this.maxTimeBetweenMaintenanceUnit = maxTimeBetweenMaintenanceUnit;
 		this.lifetimeValue = lifetimeValue;
 		this.lifetimeUnit = lifetimeUnit;
 		this.lifetimeFixedDate = lifetimeFixedDate;
@@ -87,6 +92,14 @@ public class EquipmentModelEntity {
 		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
 	}
 
+	public Unit getMaxTimeBetweenMaintenanceUnit() {
+		return maxTimeBetweenMaintenanceUnit;
+	}
+
+	public void setMaxTimeBetweenMaintenanceUnit(Unit maxTimeBetweenMaintenanceUnit) {
+		this.maxTimeBetweenMaintenanceUnit = maxTimeBetweenMaintenanceUnit;
+	}
+
 	public Integer getLifetimeValue() {
 		return lifetimeValue;
 	}
@@ -95,11 +108,11 @@ public class EquipmentModelEntity {
 		this.lifetimeValue = lifetimeValue;
 	}
 
-	public LifeTimeUnit getLifetimeUnit() {
+	public Unit getLifetimeUnit() {
 		return lifetimeUnit;
 	}
 
-	public void setLifetimeUnit(LifeTimeUnit lifetimeUnit) {
+	public void setLifetimeUnit(Unit lifetimeUnit) {
 		this.lifetimeUnit = lifetimeUnit;
 	}
 

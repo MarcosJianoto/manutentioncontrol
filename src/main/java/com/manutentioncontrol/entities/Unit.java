@@ -1,6 +1,6 @@
 package com.manutentioncontrol.entities;
 
-public enum LifeTimeUnit {
+public enum Unit {
 
 	DAYS, MONTHS, YEARS
 

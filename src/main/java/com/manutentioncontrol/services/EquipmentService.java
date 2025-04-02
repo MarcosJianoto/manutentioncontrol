@@ -35,35 +35,8 @@ public class EquipmentService {
 
 	public void createEquipment(EquipmentDTO equipmentDTO) {
 
-		/*
-		 * CategoryManutention categoryManutention =
-		 * categoryManutentionRepository.findById(equipmentDTO.getCategoryId())
-		 * .orElseThrow(() -> new IllegalArgumentException("Category is not found!"));
-		 * 
-		 * EquipmentEntity equipmentEntity = new EquipmentEntity();
-		 * equipmentEntity.setCategory(categoryManutention);
-		 * 
-		 * equipmentEntity.setName(equipmentDTO.getName());// não pode ser nulo, ja
-		 * transformei em null.
-		 * 
-		 * equipmentEntity.setLifetime(equipmentDTO.getLifetime());// esse ainda ta
-		 * incompleto, pois será inserido como // dias/mes/anos????
-		 * 
-		 * equipmentEntity.setLocalization(equipmentDTO.getLocalization());
-		 * 
-		 * equipmentEntity.setPriority(PriorityEquipment.valueOf(equipmentDTO.
-		 * getPriority().toUpperCase()));
-		 * equipmentEntity.setStatus(StatusEquipment.valueOf(equipmentDTO.getStatus().
-		 * toUpperCase()));
-		 * 
-		 * equipmentEntity.setNotificationDay(equipmentDTO.getNotificationDay());
-		 * 
-		 * // as datas: getMaxTime e getDateLast
-		 * equipmentEntity.setMaxTimeBetweenMaintenance(equipmentDTO.
-		 * getMaxTimeBetweenMaintenance());
-		 * equipmentEntity.setDateLastMaintenance(equipmentDTO.getDateLastMaintenance())
-		 * ;
-		 */
 	}
+	
+	//não pode ser nulo ou branco -> 
 
 }
