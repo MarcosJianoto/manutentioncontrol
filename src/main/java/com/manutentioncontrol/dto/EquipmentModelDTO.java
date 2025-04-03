@@ -1,8 +1,5 @@
 package com.manutentioncontrol.dto;
 
-import com.manutentioncontrol.entities.CategoryManutention;
-import com.manutentioncontrol.entities.Unit;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -12,7 +9,7 @@ public class EquipmentModelDTO {
 
 	@NotNull(message = "Category não pode ser nulo")
 	@NotBlank(message = "Category não pode ficar em branco")
-	private CategoryManutention category;
+	private Integer categoryId;
 
 	@NotNull(message = "Name não pode ser nulo")
 	@NotBlank(message = "Name não pode ficar em branco")
@@ -32,7 +29,7 @@ public class EquipmentModelDTO {
 
 	@NotNull(message = "Unidade do tempo de vida não pode ser nulo")
 	@NotBlank(message = "Unidade do tempo de vid não pode ficar em branco")
-	private Unit lifetimeUnit;
+	private String lifetimeUnit;
 
 	private String lifetimeFixedDate;
 
@@ -40,12 +37,26 @@ public class EquipmentModelDTO {
 		super();
 	}
 
-	public EquipmentModelDTO(CategoryManutention category, String name, Integer maxTimeBetweenMaintenance,
-			Integer lifetimeValue, Unit lifetimeUnit, String lifetimeFixedDate) {
+	public EquipmentModelDTO(Integer id, Integer categoryId, String name, Integer maxTimeBetweenMaintenance,
+			Integer lifetimeValue, String lifetimeUnit, String lifetimeFixedDate) {
 		super();
-		this.category = category;
+		this.id = id;
+		this.categoryId = categoryId;
 		this.name = name;
 		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
+		this.lifetimeValue = lifetimeValue;
+		this.lifetimeUnit = lifetimeUnit;
+		this.lifetimeFixedDate = lifetimeFixedDate;
+	}
+
+	public EquipmentModelDTO(Integer categoryId, String name, Integer maxTimeBetweenMaintenance,
+			String maxTimeBetweenMaintenanceUnit, Integer lifetimeValue, String lifetimeUnit,
+			String lifetimeFixedDate) {
+		super();
+		this.categoryId = categoryId;
+		this.name = name;
+		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
+		this.maxTimeBetweenMaintenanceUnit = maxTimeBetweenMaintenanceUnit;
 		this.lifetimeValue = lifetimeValue;
 		this.lifetimeUnit = lifetimeUnit;
 		this.lifetimeFixedDate = lifetimeFixedDate;
@@ -59,12 +70,12 @@ public class EquipmentModelDTO {
 		this.id = id;
 	}
 
-	public CategoryManutention getCategory() {
-		return category;
+	public Integer getCategory() {
+		return categoryId;
 	}
 
-	public void setCategory(CategoryManutention category) {
-		this.category = category;
+	public void setCategory(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getName() {
@@ -99,12 +110,12 @@ public class EquipmentModelDTO {
 		this.lifetimeValue = lifetimeValue;
 	}
 
-	public Unit getLifetimeUnit() {
+	public String getLifetimeUnit() {
 		return lifetimeUnit;
 	}
 
-	public void setLifetimeUnit(Unit lifetimeUnit) {
-		this.lifetimeUnit = lifetimeUnit;
+	public void setLifetimeUnit(String string) {
+		this.lifetimeUnit = string;
 	}
 
 	public String getLifetimeFixedDate() {

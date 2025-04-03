@@ -2,8 +2,8 @@ package com.manutentioncontrol.services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manutentioncontrol.dto.EquipmentModelDTO;
@@ -26,14 +26,13 @@ public class EquipmentModelService {
 	}
 
 	public CategoryManutention categoryManutentionExists(EquipmentModelDTO equipmentModelDTO) {
-		return categoryManutentionRepository.findById(equipmentModelDTO.getCategory().getId())
+		return categoryManutentionRepository.findById(equipmentModelDTO.getCategory())
 				.orElseThrow(() -> new IllegalArgumentException("Category is not found"));
 	}
 
 	public EquipmentModelEntity equipmentModelFindById(Integer id, EquipmentModelDTO equipmentModelDTO) {
 		return equipmentModelRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Equipment Model not found"));
-
 	}
 
 	public void blankToNull(EquipmentModelDTO equipmentModel) {
@@ -105,9 +104,35 @@ public class EquipmentModelService {
 		equipmentModelRepository.save(equipmentModelEntity);
 
 	}
-	
-	
-	
+
+	public EquipmentModelDTO getEquipmentModel(Integer id) {
+
+		EquipmentModelEntity equipmentModelEntity = equipmentModelRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Equipment Model not found"));
+
+		EquipmentModelDTO equipmentModelDTO = new EquipmentModelDTO();
+		equipmentModelDTO.setId(id);
+		equipmentModelDTO.setCategory(equipmentModelEntity.getCategory().getId());
+		equipmentModelDTO.setName(equipmentModelEntity.getName());
+		equipmentModelDTO.setMaxTimeBetweenMaintenance(equipmentModelEntity.getMaxTimeBetweenMaintenance());
+		equipmentModelDTO
+				.setMaxTimeBetweenMaintenanceUnit(equipmentModelEntity.getMaxTimeBetweenMaintenanceUnit().toString());
+		equipmentModelDTO.setLifetimeValue(equipmentModelEntity.getLifetimeValue());
+		equipmentModelDTO.setLifetimeUnit(equipmentModelEntity.getLifetimeUnit().toString());
+		equipmentModelDTO.setLifetimeFixedDate(equipmentModelDTO.getLifetimeFixedDate());
+
+		return equipmentModelDTO;
+	}
+
+	public List<EquipmentModelDTO> getAllEquipmentsModels() {
+		return equipmentModelRepository.findAll().stream().filter(
+				(eModel) -> eModel.getLifetimeFixedDate() != null && eModel.getMaxTimeBetweenMaintenanceUnit() != null)
+				.map((eModel) -> new EquipmentModelDTO(eModel.getCategory().getId(), eModel.getName(),
+						eModel.getMaxTimeBetweenMaintenance(), eModel.getMaxTimeBetweenMaintenanceUnit().toString(),
+						eModel.getLifetimeValue(), eModel.getLifetimeUnit().toString(),
+						eModel.getLifetimeFixedDate().toString()))
+				.toList();
+	}
 
 	public void deleteEquipmentModel(Integer id) {
 		equipmentModelRepository.deleteById(id);

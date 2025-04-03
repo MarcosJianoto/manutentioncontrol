@@ -37,7 +37,7 @@ public class EquipmentModelEntity {
 	@Column(name = "lifetime_value")
 	private Integer lifetimeValue;
 
-	@Column(name = "unit")
+	@Column(name = "lifetime_unit")
 	private Unit lifetimeUnit;
 
 	@Column(name = "lifetime_fixed_date")

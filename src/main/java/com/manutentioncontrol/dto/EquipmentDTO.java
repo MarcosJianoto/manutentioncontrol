@@ -35,8 +35,6 @@ public class EquipmentDTO {
 	@NotBlank(message = "Data próxima manutenção não pode ficar em branco")
 	private LocalDateTime nextMaintenanceDate;
 
-	
-	
 	public EquipmentDTO() {
 	}
 
@@ -119,7 +117,5 @@ public class EquipmentDTO {
 	public void setNextMaintenanceDate(LocalDateTime nextMaintenanceDate) {
 		this.nextMaintenanceDate = nextMaintenanceDate;
 	}
-	
-	
 
 }
