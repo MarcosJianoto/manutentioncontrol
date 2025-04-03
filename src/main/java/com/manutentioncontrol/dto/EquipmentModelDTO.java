@@ -1,7 +1,5 @@
 package com.manutentioncontrol.dto;
 
-import java.time.LocalDateTime;
-
 import com.manutentioncontrol.entities.CategoryManutention;
 import com.manutentioncontrol.entities.Unit;
 
@@ -36,14 +34,14 @@ public class EquipmentModelDTO {
 	@NotBlank(message = "Unidade do tempo de vid não pode ficar em branco")
 	private Unit lifetimeUnit;
 
-	private LocalDateTime lifetimeFixedDate;
+	private String lifetimeFixedDate;
 
 	public EquipmentModelDTO() {
 		super();
 	}
 
 	public EquipmentModelDTO(CategoryManutention category, String name, Integer maxTimeBetweenMaintenance,
-			Integer lifetimeValue, Unit lifetimeUnit, LocalDateTime lifetimeFixedDate) {
+			Integer lifetimeValue, Unit lifetimeUnit, String lifetimeFixedDate) {
 		super();
 		this.category = category;
 		this.name = name;
@@ -109,11 +107,11 @@ public class EquipmentModelDTO {
 		this.lifetimeUnit = lifetimeUnit;
 	}
 
-	public LocalDateTime getLifetimeFixedDate() {
+	public String getLifetimeFixedDate() {
 		return lifetimeFixedDate;
 	}
 
-	public void setLifetimeFixedDate(LocalDateTime lifetimeFixedDate) {
+	public void setLifetimeFixedDate(String lifetimeFixedDate) {
 		this.lifetimeFixedDate = lifetimeFixedDate;
 	}
 

@@ -1,6 +1,6 @@
 package com.manutentioncontrol.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,15 +41,14 @@ public class EquipmentModelEntity {
 	private Unit lifetimeUnit;
 
 	@Column(name = "lifetime_fixed_date")
-	private LocalDateTime lifetimeFixedDate;
+	private LocalDate lifetimeFixedDate;
 
 	public EquipmentModelEntity() {
 		super();
 	}
 
 	public EquipmentModelEntity(CategoryManutention category, String name, Integer maxTimeBetweenMaintenance,
-			Unit maxTimeBetweenMaintenanceUnit, Integer lifetimeValue, Unit lifetimeUnit,
-			LocalDateTime lifetimeFixedDate) {
+			Unit maxTimeBetweenMaintenanceUnit, Integer lifetimeValue, Unit lifetimeUnit, LocalDate lifetimeFixedDate) {
 		super();
 		this.category = category;
 		this.name = name;
@@ -116,11 +115,11 @@ public class EquipmentModelEntity {
 		this.lifetimeUnit = lifetimeUnit;
 	}
 
-	public LocalDateTime getLifetimeFixedDate() {
+	public LocalDate getLifetimeFixedDate() {
 		return lifetimeFixedDate;
 	}
 
-	public void setLifetimeFixedDate(LocalDateTime lifetimeFixedDate) {
+	public void setLifetimeFixedDate(LocalDate lifetimeFixedDate) {
 		this.lifetimeFixedDate = lifetimeFixedDate;
 	}
 
