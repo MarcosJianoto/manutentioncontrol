@@ -1,6 +1,6 @@
 package com.manutentioncontrol.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,17 +38,17 @@ public class EquipmentEntity {
 	private Integer notificationDay;
 
 	@Column(name = "last_maintenance_date")
-	private LocalDateTime dateLastMaintenance;
+	private LocalDate dateLastMaintenance;
 
 	@Column(name = "next_maintenance_date")
-	private LocalDateTime nextMaintenanceDate;
+	private LocalDate nextMaintenanceDate;
 
 	public EquipmentEntity() {
 	}
 
 	public EquipmentEntity(EquipmentModelEntity equipmentModel, String localization, PriorityEquipment priority,
-			StatusEquipment status, Integer notificationDay, LocalDateTime dateLastMaintenance,
-			LocalDateTime nextMaintenanceDate) {
+			StatusEquipment status, Integer notificationDay, LocalDate dateLastMaintenance,
+			LocalDate nextMaintenanceDate) {
 		this.equipmentModel = equipmentModel;
 		this.localization = localization;
 		this.priority = priority;
@@ -106,19 +106,19 @@ public class EquipmentEntity {
 		this.notificationDay = notificationDay;
 	}
 
-	public LocalDateTime getDateLastMaintenance() {
+	public LocalDate getDateLastMaintenance() {
 		return dateLastMaintenance;
 	}
 
-	public void setDateLastMaintenance(LocalDateTime dateLastMaintenance) {
+	public void setDateLastMaintenance(LocalDate dateLastMaintenance) {
 		this.dateLastMaintenance = dateLastMaintenance;
 	}
 
-	public LocalDateTime getNextMaintenanceDate() {
+	public LocalDate getNextMaintenanceDate() {
 		return nextMaintenanceDate;
 	}
 
-	public void setNextMaintenanceDate(LocalDateTime nextMaintenanceDate) {
+	public void setNextMaintenanceDate(LocalDate nextMaintenanceDate) {
 		this.nextMaintenanceDate = nextMaintenanceDate;
 	}
 

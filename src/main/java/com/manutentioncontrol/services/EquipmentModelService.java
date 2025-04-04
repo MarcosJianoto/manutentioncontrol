@@ -55,11 +55,14 @@ public class EquipmentModelService {
 		}
 	}
 
-	public EquipmentModelEntity equipmentEntitySet(EquipmentModelDTO equipmentModelDTO) {
+	public EquipmentModelEntity equipmentEntitySet(EquipmentModelDTO equipmentModelDTO,
+			EquipmentModelEntity existsEquipment) {
 
 		CategoryManutention categoryManutention = categoryManutentionExists(equipmentModelDTO);
 
-		EquipmentModelEntity equipmentModelEntity = new EquipmentModelEntity();
+		EquipmentModelEntity equipmentModelEntity = (existsEquipment != null ? existsEquipment
+				: new EquipmentModelEntity());
+
 		equipmentModelEntity.setCategory(categoryManutention);
 		equipmentModelEntity.setName(equipmentModelDTO.getName());
 		equipmentModelEntity.setMaxTimeBetweenMaintenance(equipmentModelDTO.getMaxTimeBetweenMaintenance());
@@ -90,18 +93,17 @@ public class EquipmentModelService {
 
 		blankToNull(equipmentModelDTO);
 
-		EquipmentModelEntity equipmentModelEntity = equipmentEntitySet(equipmentModelDTO);
+		EquipmentModelEntity equipmentModelEntity = equipmentEntitySet(equipmentModelDTO, null);
 
 		equipmentModelRepository.save(equipmentModelEntity);
 	}
 
 	public void updateEquipmentmodel(Integer id, EquipmentModelDTO equipmentModelDTO) {
 
-		equipmentModelFindById(id, equipmentModelDTO);
+		EquipmentModelEntity equipmentModelEntity = equipmentModelFindById(id, equipmentModelDTO);
+		EquipmentModelEntity equipmentUpdate = equipmentEntitySet(equipmentModelDTO, equipmentModelEntity);
 
-		EquipmentModelEntity equipmentModelEntity = equipmentEntitySet(equipmentModelDTO);
-
-		equipmentModelRepository.save(equipmentModelEntity);
+		equipmentModelRepository.save(equipmentUpdate);
 
 	}
 
