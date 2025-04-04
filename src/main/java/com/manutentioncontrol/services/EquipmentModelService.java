@@ -26,7 +26,7 @@ public class EquipmentModelService {
 	}
 
 	public CategoryManutention categoryManutentionExists(EquipmentModelDTO equipmentModelDTO) {
-		return categoryManutentionRepository.findById(equipmentModelDTO.getCategory())
+		return categoryManutentionRepository.findById(equipmentModelDTO.getCategoryId())
 				.orElseThrow(() -> new IllegalArgumentException("Category is not found"));
 	}
 
@@ -62,6 +62,10 @@ public class EquipmentModelService {
 
 		EquipmentModelEntity equipmentModelEntity = (existsEquipment != null ? existsEquipment
 				: new EquipmentModelEntity());
+		
+		if(existsEquipment != null) {
+			equipmentModelEntity.setId(existsEquipment.getId());
+		}
 
 		equipmentModelEntity.setCategory(categoryManutention);
 		equipmentModelEntity.setName(equipmentModelDTO.getName());
@@ -69,8 +73,7 @@ public class EquipmentModelService {
 		equipmentModelEntity.setMaxTimeBetweenMaintenanceUnit(
 				Unit.valueOf(equipmentModelDTO.getMaxTimeBetweenMaintenanceUnit().toUpperCase()));
 		equipmentModelEntity.setLifetimeValue(equipmentModelDTO.getLifetimeValue());
-		equipmentModelEntity
-				.setLifetimeUnit(Unit.valueOf(equipmentModelDTO.getMaxTimeBetweenMaintenanceUnit().toUpperCase()));
+		equipmentModelEntity.setLifetimeUnit(Unit.valueOf(equipmentModelDTO.getLifetimeUnit().toUpperCase()));
 
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate date = null;
@@ -78,10 +81,7 @@ public class EquipmentModelService {
 		try {
 			date = LocalDate.parse(equipmentModelDTO.getLifetimeFixedDate(), dateTimeFormatter);
 		} catch (Exception e) {
-			if (date == null) {
-				date = LocalDate.parse("01/01/1970", dateTimeFormatter);
-			}
-			System.out.println(e.getMessage());
+			throw new IllegalArgumentException("Data invávelida, use o formato dd/MM/yyyy");
 		}
 
 		equipmentModelEntity.setLifetimeFixedDate(date);
@@ -114,14 +114,14 @@ public class EquipmentModelService {
 
 		EquipmentModelDTO equipmentModelDTO = new EquipmentModelDTO();
 		equipmentModelDTO.setId(id);
-		equipmentModelDTO.setCategory(equipmentModelEntity.getCategory().getId());
+		equipmentModelDTO.setCategoryId(equipmentModelEntity.getCategory().getId());
 		equipmentModelDTO.setName(equipmentModelEntity.getName());
 		equipmentModelDTO.setMaxTimeBetweenMaintenance(equipmentModelEntity.getMaxTimeBetweenMaintenance());
 		equipmentModelDTO
 				.setMaxTimeBetweenMaintenanceUnit(equipmentModelEntity.getMaxTimeBetweenMaintenanceUnit().toString());
 		equipmentModelDTO.setLifetimeValue(equipmentModelEntity.getLifetimeValue());
 		equipmentModelDTO.setLifetimeUnit(equipmentModelEntity.getLifetimeUnit().toString());
-		equipmentModelDTO.setLifetimeFixedDate(equipmentModelDTO.getLifetimeFixedDate());
+		equipmentModelDTO.setLifetimeFixedDate(equipmentModelEntity.getLifetimeFixedDate().toString());
 
 		return equipmentModelDTO;
 	}

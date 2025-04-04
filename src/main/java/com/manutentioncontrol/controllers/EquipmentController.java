@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manutentioncontrol.dto.EquipmentDTO;
-import com.manutentioncontrol.dto.EquipmentModelDTO;
-import com.manutentioncontrol.entities.EquipmentEntity;
-import com.manutentioncontrol.services.EquipmentModelService;
 import com.manutentioncontrol.services.EquipmentService;
 
 @RestController
+@RequestMapping("/equipment")
 public class EquipmentController {
 
 	private EquipmentService equipmentService;

@@ -70,11 +70,11 @@ public class EquipmentModelDTO {
 		this.id = id;
 	}
 
-	public Integer getCategory() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategory(Integer categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 

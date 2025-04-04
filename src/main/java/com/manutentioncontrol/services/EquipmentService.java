@@ -41,6 +41,10 @@ public class EquipmentService {
 		EquipmentModelEntity equipmentModelEntity = equipmentModelFindById(equipmentDTO);
 
 		EquipmentEntity equipmentEntity = (existEntity != null) ? existEntity : new EquipmentEntity();
+		
+		if(existEntity != null) {
+			equipmentModelEntity.setId(existEntity.getId());
+		}
 
 		equipmentEntity.setEquipmentModel(equipmentModelEntity);
 		equipmentEntity.setLocalization(equipmentDTO.getLocalization());
