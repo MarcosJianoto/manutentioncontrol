@@ -30,7 +30,7 @@ public class EquipmentModelService {
 				.orElseThrow(() -> new IllegalArgumentException("Category is not found"));
 	}
 
-	public EquipmentModelEntity equipmentModelFindById(Integer id, EquipmentModelDTO equipmentModelDTO) {
+	public EquipmentModelEntity equipmentModelFindById(Integer id) {
 		return equipmentModelRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Equipment Model not found"));
 	}
@@ -100,7 +100,7 @@ public class EquipmentModelService {
 
 	public void updateEquipmentmodel(Integer id, EquipmentModelDTO equipmentModelDTO) {
 
-		EquipmentModelEntity equipmentModelEntity = equipmentModelFindById(id, equipmentModelDTO);
+		EquipmentModelEntity equipmentModelEntity = equipmentModelFindById(id);
 		EquipmentModelEntity equipmentUpdate = equipmentEntitySet(equipmentModelDTO, equipmentModelEntity);
 
 		equipmentModelRepository.save(equipmentUpdate);
@@ -137,6 +137,7 @@ public class EquipmentModelService {
 	}
 
 	public void deleteEquipmentModel(Integer id) {
+		equipmentModelFindById(id);
 		equipmentModelRepository.deleteById(id);
 	}
 

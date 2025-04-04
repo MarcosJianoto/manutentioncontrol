@@ -2,10 +2,12 @@ package com.manutentioncontrol.services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.manutentioncontrol.dto.EquipmentDTO;
+import com.manutentioncontrol.dto.EquipmentModelDTO;
 import com.manutentioncontrol.entities.EquipmentEntity;
 import com.manutentioncontrol.entities.EquipmentModelEntity;
 import com.manutentioncontrol.entities.PriorityEquipment;
@@ -77,10 +79,40 @@ public class EquipmentService {
 	public void updateEquipment(Integer id, EquipmentDTO equipmentDTO) {
 
 		EquipmentEntity equipmentEntity = equipmentFindById(id);
-
 		EquipmentEntity equipmentEntityToDTO = equipmentDTOtoEntity(equipmentDTO, equipmentEntity);
-
 		equipmentRepository.save(equipmentEntityToDTO);
+	}
+
+	public EquipmentDTO getEquipment(Integer id) {
+
+		EquipmentEntity equipmentEntity = equipmentRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Equipment Model not found"));
+
+		EquipmentDTO equipmentDTO = new EquipmentDTO();
+		equipmentDTO.setId(id);
+		equipmentDTO.setEquipmentModel(equipmentEntity.getId());
+		equipmentDTO.setPriority(equipmentEntity.getPriority().toString());
+		equipmentDTO.setStatus(equipmentEntity.getStatus().toString());
+		equipmentDTO.setNotificationDay(equipmentEntity.getNotificationDay());
+		equipmentDTO.setDateLastMaintenance(equipmentEntity.getDateLastMaintenance().toString());
+		equipmentDTO.setNextMaintenanceDate(equipmentEntity.getNextMaintenanceDate().toString());
+
+		return equipmentDTO;
+
+	}
+
+	public List<EquipmentDTO> getEquipments() {
+
+		return equipmentRepository.findAll().stream()
+				.map((equip) -> new EquipmentDTO(equip.getEquipmentModel().getId(), equip.getLocalization(),
+						equip.getPriority().toString(), equip.getStatus().toString(), equip.getNotificationDay(),
+						equip.getDateLastMaintenance().toString(), equip.getNextMaintenanceDate().toString()))
+				.toList();
+	}
+
+	public void deleteEquipment(Integer id) {
+		equipmentFindById(id);
+		equipmentRepository.deleteById(id);
 	}
 
 }
