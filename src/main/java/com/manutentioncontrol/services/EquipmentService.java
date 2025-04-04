@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.manutentioncontrol.dto.EquipmentDTO;
-import com.manutentioncontrol.dto.EquipmentModelDTO;
 import com.manutentioncontrol.entities.EquipmentEntity;
 import com.manutentioncontrol.entities.EquipmentModelEntity;
 import com.manutentioncontrol.entities.PriorityEquipment;
