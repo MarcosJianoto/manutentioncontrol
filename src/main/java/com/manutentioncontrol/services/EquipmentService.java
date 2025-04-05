@@ -11,6 +11,7 @@ import com.manutentioncontrol.entities.EquipmentEntity;
 import com.manutentioncontrol.entities.EquipmentModelEntity;
 import com.manutentioncontrol.entities.PriorityEquipment;
 import com.manutentioncontrol.entities.StatusEquipment;
+import com.manutentioncontrol.entities.MaintenanceUnit;
 import com.manutentioncontrol.repositories.EquipmentModelRepository;
 import com.manutentioncontrol.repositories.EquipmentRepository;
 
@@ -41,8 +42,8 @@ public class EquipmentService {
 		EquipmentModelEntity equipmentModelEntity = equipmentModelFindById(equipmentDTO);
 
 		EquipmentEntity equipmentEntity = (existEntity != null) ? existEntity : new EquipmentEntity();
-		
-		if(existEntity != null) {
+
+		if (existEntity != null) {
 			equipmentModelEntity.setId(existEntity.getId());
 		}
 
@@ -84,6 +85,21 @@ public class EquipmentService {
 		EquipmentEntity equipmentEntity = equipmentFindById(id);
 		EquipmentEntity equipmentEntityToDTO = equipmentDTOtoEntity(equipmentDTO, equipmentEntity);
 		equipmentRepository.save(equipmentEntityToDTO);
+	}
+
+	public void updateEquipmentFromHistory(EquipmentEntity equipmentEntity) {
+
+		equipmentEntity.setDateLastMaintenance(LocalDate.now());
+		EquipmentModelEntity equipmentModelEntity = equipmentModelRepository
+				.findById(equipmentEntity.getEquipmentModel().getId())
+				.orElseThrow(() -> new IllegalArgumentException("Não foi encontrado o modelo do equipamento!"));
+
+		MaintenanceUnit unit = equipmentModelEntity.getMaxTimeBetweenMaintenanceUnit();
+		LocalDate nextDate = unit.addToDate(LocalDate.now(), equipmentModelEntity.getMaxTimeBetweenMaintenance());
+		equipmentEntity.setNextMaintenanceDate(nextDate);
+
+		equipmentEntity.setNotificationDay(equipmentEntity.getNotificationDay());
+
 	}
 
 	public EquipmentDTO getEquipment(Integer id) {

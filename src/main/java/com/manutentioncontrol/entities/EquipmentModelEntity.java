@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,14 +33,16 @@ public class EquipmentModelEntity {
 	@Column(name = "max_time_between_maintenance")
 	private Integer maxTimeBetweenMaintenance;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "max_time_between_maintenance_unit")
-	private Unit maxTimeBetweenMaintenanceUnit;
+	private MaintenanceUnit maxTimeBetweenMaintenanceUnit;
 
 	@Column(name = "lifetime_value")
 	private Integer lifetimeValue;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "lifetime_unit")
-	private Unit lifetimeUnit;
+	private MaintenanceUnit lifetimeUnit;
 
 	@Column(name = "lifetime_fixed_date")
 	private LocalDate lifetimeFixedDate;
@@ -48,7 +52,7 @@ public class EquipmentModelEntity {
 	}
 
 	public EquipmentModelEntity(CategoryManutention category, String name, Integer maxTimeBetweenMaintenance,
-			Unit maxTimeBetweenMaintenanceUnit, Integer lifetimeValue, Unit lifetimeUnit, LocalDate lifetimeFixedDate) {
+			MaintenanceUnit maxTimeBetweenMaintenanceUnit, Integer lifetimeValue, MaintenanceUnit lifetimeUnit, LocalDate lifetimeFixedDate) {
 		super();
 		this.category = category;
 		this.name = name;
@@ -91,11 +95,11 @@ public class EquipmentModelEntity {
 		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
 	}
 
-	public Unit getMaxTimeBetweenMaintenanceUnit() {
+	public MaintenanceUnit getMaxTimeBetweenMaintenanceUnit() {
 		return maxTimeBetweenMaintenanceUnit;
 	}
 
-	public void setMaxTimeBetweenMaintenanceUnit(Unit maxTimeBetweenMaintenanceUnit) {
+	public void setMaxTimeBetweenMaintenanceUnit(MaintenanceUnit maxTimeBetweenMaintenanceUnit) {
 		this.maxTimeBetweenMaintenanceUnit = maxTimeBetweenMaintenanceUnit;
 	}
 
@@ -107,11 +111,11 @@ public class EquipmentModelEntity {
 		this.lifetimeValue = lifetimeValue;
 	}
 
-	public Unit getLifetimeUnit() {
+	public MaintenanceUnit getLifetimeUnit() {
 		return lifetimeUnit;
 	}
 
-	public void setLifetimeUnit(Unit lifetimeUnit) {
+	public void setLifetimeUnit(MaintenanceUnit lifetimeUnit) {
 		this.lifetimeUnit = lifetimeUnit;
 	}
 

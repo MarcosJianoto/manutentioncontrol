@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.manutentioncontrol.dto.EquipmentModelDTO;
 import com.manutentioncontrol.entities.CategoryManutention;
 import com.manutentioncontrol.entities.EquipmentModelEntity;
-import com.manutentioncontrol.entities.Unit;
+import com.manutentioncontrol.entities.MaintenanceUnit;
 import com.manutentioncontrol.repositories.CategoryManutentionRepository;
 import com.manutentioncontrol.repositories.EquipmentModelRepository;
 
@@ -71,9 +71,9 @@ public class EquipmentModelService {
 		equipmentModelEntity.setName(equipmentModelDTO.getName());
 		equipmentModelEntity.setMaxTimeBetweenMaintenance(equipmentModelDTO.getMaxTimeBetweenMaintenance());
 		equipmentModelEntity.setMaxTimeBetweenMaintenanceUnit(
-				Unit.valueOf(equipmentModelDTO.getMaxTimeBetweenMaintenanceUnit().toUpperCase()));
+				MaintenanceUnit.valueOf(equipmentModelDTO.getMaxTimeBetweenMaintenanceUnit().toUpperCase()));
 		equipmentModelEntity.setLifetimeValue(equipmentModelDTO.getLifetimeValue());
-		equipmentModelEntity.setLifetimeUnit(Unit.valueOf(equipmentModelDTO.getLifetimeUnit().toUpperCase()));
+		equipmentModelEntity.setLifetimeUnit(MaintenanceUnit.valueOf(equipmentModelDTO.getLifetimeUnit().toUpperCase()));
 
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate date = null;

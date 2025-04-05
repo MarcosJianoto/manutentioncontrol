@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,8 +31,10 @@ public class EquipmentEntity {
 	private String localization;
 
 	@Column(name = "priority")
+	@Enumerated(EnumType.STRING)
 	private PriorityEquipment priority;
-
+	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private StatusEquipment status;
 
