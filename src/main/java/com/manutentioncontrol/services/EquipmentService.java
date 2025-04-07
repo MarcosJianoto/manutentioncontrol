@@ -123,9 +123,10 @@ public class EquipmentService {
 	public List<EquipmentDTO> getEquipments() {
 
 		return equipmentRepository.findAll().stream()
-				.map((equip) -> new EquipmentDTO(equip.getEquipmentModel().getId(), equip.getLocalization(),
-						equip.getPriority().toString(), equip.getStatus().toString(), equip.getNotificationDay(),
-						equip.getDateLastMaintenance().toString(), equip.getNextMaintenanceDate().toString()))
+				.map((equip) -> new EquipmentDTO(equip.getId(), equip.getEquipmentModel().getId(),
+						equip.getLocalization(), equip.getPriority().toString(), equip.getStatus().toString(),
+						equip.getNotificationDay(), equip.getDateLastMaintenance().toString(),
+						equip.getNextMaintenanceDate().toString()))
 				.toList();
 	}
 

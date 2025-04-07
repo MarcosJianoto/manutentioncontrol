@@ -33,6 +33,18 @@ public class EquipmentDTO {
 
 	public EquipmentDTO() {
 	}
+	
+	public EquipmentDTO(Integer id,Integer equipmentModel, String localization, String priority, String status,
+			Integer notificationDay, String dateLastMaintenance, String nextMaintenanceDate) {
+		this.id = id;
+		this.equipmentModel = equipmentModel;
+		this.localization = localization;
+		this.priority = priority;
+		this.status = status;
+		this.notificationDay = notificationDay;
+		this.dateLastMaintenance = dateLastMaintenance;
+		this.nextMaintenanceDate = nextMaintenanceDate;
+	}
 
 	public EquipmentDTO(Integer equipmentModel, String localization, String priority, String status,
 			Integer notificationDay, String dateLastMaintenance, String nextMaintenanceDate) {

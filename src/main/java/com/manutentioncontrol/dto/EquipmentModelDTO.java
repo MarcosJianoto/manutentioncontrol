@@ -38,12 +38,14 @@ public class EquipmentModelDTO {
 	}
 
 	public EquipmentModelDTO(Integer id, Integer categoryId, String name, Integer maxTimeBetweenMaintenance,
-			Integer lifetimeValue, String lifetimeUnit, String lifetimeFixedDate) {
+			String maxTimeBetweenMaintenanceUnit, Integer lifetimeValue, String lifetimeUnit,
+			String lifetimeFixedDate) {
 		super();
 		this.id = id;
 		this.categoryId = categoryId;
 		this.name = name;
 		this.maxTimeBetweenMaintenance = maxTimeBetweenMaintenance;
+		this.maxTimeBetweenMaintenanceUnit = maxTimeBetweenMaintenanceUnit;
 		this.lifetimeValue = lifetimeValue;
 		this.lifetimeUnit = lifetimeUnit;
 		this.lifetimeFixedDate = lifetimeFixedDate;

@@ -62,8 +62,8 @@ public class EquipmentModelService {
 
 		EquipmentModelEntity equipmentModelEntity = (existsEquipment != null ? existsEquipment
 				: new EquipmentModelEntity());
-		
-		if(existsEquipment != null) {
+
+		if (existsEquipment != null) {
 			equipmentModelEntity.setId(existsEquipment.getId());
 		}
 
@@ -73,18 +73,23 @@ public class EquipmentModelService {
 		equipmentModelEntity.setMaxTimeBetweenMaintenanceUnit(
 				MaintenanceUnit.valueOf(equipmentModelDTO.getMaxTimeBetweenMaintenanceUnit().toUpperCase()));
 		equipmentModelEntity.setLifetimeValue(equipmentModelDTO.getLifetimeValue());
-		equipmentModelEntity.setLifetimeUnit(MaintenanceUnit.valueOf(equipmentModelDTO.getLifetimeUnit().toUpperCase()));
+		equipmentModelEntity
+				.setLifetimeUnit(MaintenanceUnit.valueOf(equipmentModelDTO.getLifetimeUnit().toUpperCase()));
 
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate date = null;
 
 		try {
 			date = LocalDate.parse(equipmentModelDTO.getLifetimeFixedDate(), dateTimeFormatter);
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Data invávelida, use o formato dd/MM/yyyy");
-		}
+			equipmentModelEntity.setLifetimeFixedDate(date);
 
-		equipmentModelEntity.setLifetimeFixedDate(date);
+		} catch (Exception e) {
+			if (date == null) {
+				equipmentModelEntity.setLifetimeFixedDate(date);
+			}else {
+				throw new IllegalArgumentException("Data inválida, use o formato dd/MM/yyyy");
+			}
+		}
 
 		return equipmentModelEntity;
 	}
@@ -129,7 +134,7 @@ public class EquipmentModelService {
 	public List<EquipmentModelDTO> getAllEquipmentsModels() {
 		return equipmentModelRepository.findAll().stream().filter(
 				(eModel) -> eModel.getLifetimeFixedDate() != null && eModel.getMaxTimeBetweenMaintenanceUnit() != null)
-				.map((eModel) -> new EquipmentModelDTO(eModel.getCategory().getId(), eModel.getName(),
+				.map((eModel) -> new EquipmentModelDTO(eModel.getId(), eModel.getCategory().getId(), eModel.getName(),
 						eModel.getMaxTimeBetweenMaintenance(), eModel.getMaxTimeBetweenMaintenanceUnit().toString(),
 						eModel.getLifetimeValue(), eModel.getLifetimeUnit().toString(),
 						eModel.getLifetimeFixedDate().toString()))
