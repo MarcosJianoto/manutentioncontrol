@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manutentioncontrol.dto.UsersDTO;
-import com.manutentioncontrol.entities.UserRole;
 import com.manutentioncontrol.entities.UsersEntity;
 import com.manutentioncontrol.repositories.UsersRepository;
+
+import authentication.UserRole;
 
 @Service
 public class UsersService {

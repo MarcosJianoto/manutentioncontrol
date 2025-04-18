@@ -1,4 +1,4 @@
-package com.manutentioncontrol.entities;
+package authentication;
 
 public enum UserRole {
 
