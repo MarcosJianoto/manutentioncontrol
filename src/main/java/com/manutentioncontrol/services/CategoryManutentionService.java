@@ -2,7 +2,6 @@ package com.manutentioncontrol.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manutentioncontrol.dto.CategoryManutentionDTO;
@@ -14,7 +13,7 @@ import com.manutentioncontrol.repositories.UsersRepository;
 @Service
 public class CategoryManutentionService {
 
-	@Autowired	 CategoryManutentionRepository categoryManutentionRepository;
+	private CategoryManutentionRepository categoryManutentionRepository;
 	private UsersRepository usersRepository;
 
 	public CategoryManutentionService(CategoryManutentionRepository categoryManutentionRepository,
@@ -39,7 +38,7 @@ public class CategoryManutentionService {
 		UsersEntity user = usersRepository.findById(categoryManutentionDTO.getUserId())
 				.orElseThrow(() -> new IllegalArgumentException("user not found"));
 
-		if (categoryManutentionRepository.existsByName(categoryManutentionDTO.getName())) {
+		if (categoryManutentionRepository.existsByUserIdAndName(user , categoryManutentionDTO.getName())) {
 			throw new IllegalArgumentException("Categoria já existe! ");
 		} else {
 			CategoryManutention categoryManutention = new CategoryManutention(user, categoryManutentionDTO.getName());
