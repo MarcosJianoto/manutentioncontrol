@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manutentioncontrol.dto.UsersDTO;
+import com.manutentioncontrol.entities.UserRole;
 import com.manutentioncontrol.entities.UsersEntity;
 import com.manutentioncontrol.repositories.UsersRepository;
 
@@ -34,7 +35,7 @@ public class UsersService {
 		if (usersRepository.existsByEmail(userDTO.getEmail())) {
 			throw new IllegalArgumentException("Email already in use.");
 		}
-		UsersEntity user = new UsersEntity(userDTO.getEmail(), userDTO.getPassword());
+		UsersEntity user = new UsersEntity(userDTO.getEmail(), userDTO.getPassword(), UserRole.USER);
 		usersRepository.save(user);
 	}
 
@@ -70,7 +71,6 @@ public class UsersService {
 				throw new IllegalArgumentException("User not found");
 			}
 			usersRepository.deleteById(id);
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
