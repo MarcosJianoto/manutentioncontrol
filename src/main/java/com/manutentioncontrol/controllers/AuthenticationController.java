@@ -1,4 +1,4 @@
-package authentication;
+package com.manutentioncontrol.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manutentioncontrol.entities.UsersEntity;
 import com.manutentioncontrol.repositories.UsersRepository;
 
+import authentication.AuthenticationDTO;
+import authentication.RegisterDTO;
+import authentication.UserRole;
 import jakarta.validation.Valid;
 
 @RestController
@@ -40,9 +43,11 @@ public class AuthenticationController {
 			return ResponseEntity.badRequest().build();
 
 		String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-		UsersEntity usersEntity = new UsersEntity(data.email(), data.password(), UserRole.valueOf(data.role()));
 
-		this.usersRepository.save(usersEntity);
+		UserRole userRole = UserRole.valueOf(data.role().toUpperCase());
+		UsersEntity user = new UsersEntity(data.email(), encryptedPassword, userRole);
+
+		this.usersRepository.save(user);
 
 		return ResponseEntity.ok().build();
 

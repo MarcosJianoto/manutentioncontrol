@@ -22,6 +22,8 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 public class UsersEntity implements UserDetails {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_sequence")
 	@SequenceGenerator(name = "users_sequence", sequenceName = "users_sequence", allocationSize = 1)
@@ -81,10 +83,6 @@ public class UsersEntity implements UserDetails {
 
 	public UserRole getRole() {
 		return role;
-	}
-
-	public void setRole(UserRole role) {
-		this.role = role;
 	}
 
 	@Override
