@@ -1,10 +1,8 @@
 package com.manutentioncontrol.controllers;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manutentioncontrol.entities.UsersEntity;
+import com.manutentioncontrol.infra.security.TokenService;
 import com.manutentioncontrol.repositories.UsersRepository;
 
 import authentication.AuthenticationDTO;
+import authentication.LoginResponseDTO;
 import authentication.RegisterDTO;
 import authentication.UserRole;
 import jakarta.validation.Valid;
@@ -26,23 +26,26 @@ public class AuthenticationController {
 	private AuthenticationManager authenticationManager;
 	private UsersRepository usersRepository;
 	private PasswordEncoder passwordEncoder;
+	private TokenService tokenService;
 
 	public AuthenticationController(AuthenticationManager authenticationManager, UsersRepository usersRepository,
-			PasswordEncoder passwordEncoder) {
+			PasswordEncoder passwordEncoder, TokenService tokenService) {
 		this.authenticationManager = authenticationManager;
 		this.usersRepository = usersRepository;
 		this.passwordEncoder = passwordEncoder;
+		this.tokenService = tokenService;
 	};
 
 	@PostMapping("/login")
-	public ResponseEntity<Void> login(@RequestBody @Valid AuthenticationDTO data) {
-		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(data.email(), data.password()));
-			return ResponseEntity.ok().build();
-		} catch (AuthenticationException ex) {
+	public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data) {
 
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-		}
+		var usernamePassowrd = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+		var auth = this.authenticationManager.authenticate(usernamePassowrd);
+
+		var token = tokenService.generateToken((UsersEntity) auth.getPrincipal());
+
+		return ResponseEntity.ok(new LoginResponseDTO(token));
+
 	}
 
 	@PostMapping("/register")
